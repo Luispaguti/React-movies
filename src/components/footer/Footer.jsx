@@ -1,13 +1,14 @@
 import React from 'react'
+import "./Footer.css"
 
 function Footer() {
   return (
     <footer className='bg-black' >
       <div>
       
-      <section class="mt-5">
+      <section class="mt-2">
         
-        <div class="d-flex flex-row  pt-5">
+        <div class="d-flex flex-row  pt-2">
         
           <div class="p-2">
             <p class="font-weight-bold">
@@ -60,7 +61,7 @@ function Footer() {
         <p>Copyright 2016 DEMO Straming All Rights Reserved.</p>
       </section>
 
-      <section class="mt-5 pb-5 d-flex justify-content-center justify-content-lg-between p-4">
+      <section class="mt-5 d-flex justify-content-center justify-content-lg-between p-4">
       <div class="d-flex flex-row">
         <a>
           <svg xmlns="http://www.w3.org/2000/svg" height="30" width="66.1" viewBox="0 0 166.1 299"><path fill="#FFF" d="M166.1 52h-47.4c-5.6 0-11.9 7.4-11.9 17.2v34.3h59.3v48.8h-59.3V299h-56V152.3H0v-48.8h50.8V74.7C50.8 33.5 79.4 0 118.6 0H166v52z"/></svg>
