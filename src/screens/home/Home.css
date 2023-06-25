@@ -1,0 +1,28 @@
+
+.movies{
+  width: 150px;
+  height: 200px;
+  background-color:black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+.series{
+  width: 150px;
+  height: 200px;
+  background-color:black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+

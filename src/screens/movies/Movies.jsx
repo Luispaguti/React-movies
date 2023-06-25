@@ -1,24 +1,28 @@
-import React from 'react'
-import { useState } from "react";
-import moviesData from "../../data/sample.json"
+import React from 'react';
+import { useState, useEffect } from 'react';
+import moviesData from '../../data/sample.json';
 
 function Movies() {
-  console.log(moviesData.entries[1].images["Poster Art"].url)
-  const [movies, setMovies] = useState(moviesData.entries.slice(0, 20)) 
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const filteredMovies = moviesData.entries.filter((movie) => movie.programType === 'movie');
+    setMovies(filteredMovies.slice(0, 20));
+  }, []);
+
   return (
-    <div className='container py-4'>
-    <div class="d-flex align-content-start flex-wrap">
-      {movies.map((movie => 
-      <div class="card mx-2" style={{width: "8rem" , height: "8rem"}}>
-        <img src={movie.images["Poster Art"].url} class="card-img-top" alt="..." />
-        <div class="card-body">
-        </div>
-        <p class="card-title">{movie.title}</p>
-      </div>))}
-      
+    <div className="container py-4">
+      <div className="d-flex align-content-start flex-wrap">
+        {movies.map((movie) => (
+          <div className="card mx-2" style={{ width: '8rem', height: '8rem' }} key={movie.title}>
+            <img src={movie.images['Poster Art'].url} className="card-img-top" alt="..." />
+            <div className="card-body"></div>
+            <p className="card-title">{movie.title}</p>
+          </div>
+        ))}
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Movies
+export default Movies;
