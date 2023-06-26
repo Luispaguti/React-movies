@@ -2,13 +2,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import seriesData from '../../data/sample.json';
 import pop from '../../../src/popcorn.jpg'
+import './Series.css'
 
 function Series() {
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
     const filteredSeries = seriesData.entries.filter((serie) => serie.programType === 'series' && serie.releaseYear >= 2010);
-    setSeries(filteredSeries.slice(0, 20));
+    const sortedSeries = filteredSeries.sort((a, b) => a.title.localeCompare(b.title));
+    setSeries(sortedSeries.slice(0, 20));
   }, []);
 
   const handleImageError = (event) => {
@@ -30,10 +32,9 @@ function Series() {
               onError={handleImageError}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                />
-               <div className='card-body'>
+               
                <p className="card-title" style={{ marginTop: '0.2rem' }}>{serie.title}</p>
-               </div>
-            
+               
           </div>
         ))}
       </div>

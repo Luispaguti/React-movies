@@ -2,15 +2,16 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import moviesData from '../../data/sample.json';
 import pop from '../../../src/popcorn.jpg'
+import "./Movies.css"
 
 function Movies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const filteredMovies = moviesData.entries.filter((movie) => movie.programType === 'movie' && movie.releaseYear >= 2010);
-    setMovies(filteredMovies.slice(0, 20));
+    const sortedMovies = filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+    setMovies(sortedMovies.slice(0, 20));
   }, []);
-
   console.log(moviesData.entries[1].releaseYear)
 
   const handleImageError = (event) => {
@@ -31,9 +32,9 @@ function Movies() {
               onError={handleImageError}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                />
-               <div className='card-body'>
+               
                <p className="card-title" style={{ marginTop: '0.2rem' }}>{movie.title}</p>
-               </div>
+              
             
             </div>
           ))}
