@@ -6,6 +6,7 @@ import "./Movies.css"
 
 function Movies() {
   const [movies, setMovies] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState(null);
 
   useEffect(() => {
     const filteredMovies = moviesData.entries.filter((movie) => movie.programType === 'movie' && movie.releaseYear >= 2010);
@@ -13,6 +14,16 @@ function Movies() {
     setMovies(sortedMovies.slice(0, 20));
   }, []);
   console.log(moviesData.entries[1].releaseYear)
+
+  const handleImgClick = (movie) => {
+    if (selectedMovies && selectedMovies === movie) {
+      // Si ya hay una movie seleccionada y se hace clic en la misma, deseleccionarla
+      setSelectedMovies(null);
+    } else {
+      // Si se hace clic en una movie diferente o no hay ninguna seleccionada, seleccionar la movie clicada
+      setSelectedMovies(movie);
+    }
+  };
 
   const handleImageError = (event) => {
     event.target.src = pop;
@@ -31,6 +42,7 @@ function Movies() {
               alt="..."
               onError={handleImageError}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onClick={() => handleImgClick(movie)} 
                />
                
                <p className="card-title" style={{ marginTop: '0.2rem' }}>{movie.title}</p>
@@ -39,6 +51,15 @@ function Movies() {
             </div>
           ))}
         </div>
+
+        {selectedMovies && (
+        <div className="popup">
+          <h2>{selectedMovies.title}</h2>
+          <p>{selectedMovies.description}</p>
+          <p>Release Year: {selectedMovies.releaseYear}</p>
+          <img src={selectedMovies.images['Poster Art'].url} alt="Poster" />
+        </div>
+      )}
       </div>
     );
   }

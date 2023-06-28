@@ -6,6 +6,7 @@ import './Series.css'
 
 function Series() {
   const [series, setSeries] = useState([]);
+  const [selectedSeries, setSelectedSeries] = useState(null);
 
   useEffect(() => {
     const filteredSeries = seriesData.entries.filter((serie) => serie.programType === 'series' && serie.releaseYear >= 2010);
@@ -20,6 +21,16 @@ function Series() {
     event.target.style.height = '100%';
   };
 
+  const handleImgClick = (serie) => {
+    if (selectedSeries && selectedSeries === serie) {
+      // Si ya hay una serie seleccionada y se hace clic en la misma, deseleccionarla
+      setSelectedSeries(null);
+    } else {
+      // Si se hace clic en una serie diferente o no hay ninguna seleccionada, seleccionar la serie clicada
+      setSelectedSeries(serie);
+    }
+  };
+
   return (
     <div className="container py-4">
       <div className="d-flex align-content-start flex-wrap">
@@ -31,6 +42,7 @@ function Series() {
               alt="..."
               onError={handleImageError}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onClick={() => handleImgClick(serie)} 
                />
                
                <p className="card-title" style={{ marginTop: '0.2rem' }}>{serie.title}</p>
@@ -38,6 +50,17 @@ function Series() {
           </div>
         ))}
       </div>
+
+      {selectedSeries && (
+        <div className="popup">
+          <h2>{selectedSeries.title}</h2>
+          <p>{selectedSeries.description}</p>
+          <p>Release Year: {selectedSeries.releaseYear}</p>
+          <img src={selectedSeries.images['Poster Art'].url} alt="Poster" />
+        </div>
+      )}
+
+
     </div>
   );
 }
